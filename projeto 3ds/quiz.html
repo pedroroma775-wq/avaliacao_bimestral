@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Completo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Função para corrigir as 10 perguntas técnicas
+    function verificarRespostas() {
+      const respostasCertas = {
+        q1: "a", q2: "a", q3: "a", q4: "b", q5: "b",
+        q6: "a", q7: "a", q8: "a", q9: "a", q10: "a"
+      };
+
+      let total = 10;
+      let pontos = 0;
+
+      for (let i = 1; i <= total; i++) {
+        let resposta = document.querySelector(`input[name="q${i}"]:checked`);
+        if (resposta && resposta.value === respostasCertas[`q${i}`]) {
+          pontos++;
+        }
+      }
+
+      document.getElementById("resultadoTecnico").style.display = "block";
+      document.getElementById("resultadoTecnico").innerHTML = 
+        `<strong>Você acertou ${pontos} de ${total} questões técnicas.</strong>`;
+    }
+
+    // Função para enviar perguntas pessoais para backend
+    function enviarFormulario(event) {
+      event.preventDefault();
+      const form = document.getElementById('quizForm');
+      const formData = new FormData(form);
+
+      fetch('backend/respostas.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => alert(data.status === "success" ? "Respostas pessoais enviadas!" : "Erro ao enviar"))
+      .catch(err => alert("Erro ao conectar com o backend"));
+      
+      // Corrigir o quiz técnico também
+      verificarRespostas();
+    }
+  </script>
+</head>
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Trabalho Curso</a>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Página 1</a></li>
+        <li class="nav-item"><a class="nav-link" href="pagina2.html">Página 2</a></li>
+        <li class="nav-item"><a class="nav-link active" href="quiz.html">Quiz</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5 mb-5">
+    <h1 class="text-center mb-4">Quiz – Desenvolvimento de Sistemas</h1>
+    
+    <form id="quizForm" onsubmit="enviarFormulario(event)">
+
+      <!-- 10 Perguntas Técnicas -->
+      <div class="mb-3">
+        <label class="form-label">1 - O que é uma linguagem de programação?</label><br>
+        <input type="radio" name="q1" value="a"> a) Um código usado para criar sistemas<br>
+        <input type="radio" name="q1" value="b"> b) Um equipamento de computador
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">2 - Para que serve um banco de dados?</label><br>
+        <input type="radio" name="q2" value="a"> a) Para guardar informações<br>
+        <input type="radio" name="q2" value="b"> b) Para aumentar a velocidade da internet
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">3 - O que significa front-end?</label><br>
+        <input type="radio" name="q3" value="a"> a) A parte do sistema que o usuário vê e usa<br>
+        <input type="radio" name="q3" value="b"> b) A parte escondida do sistema que processa os dados
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">4 - O que significa back-end?</label><br>
+        <input type="radio" name="q4" value="a"> a) O visual e design de um sistema<br>
+        <input type="radio" name="q4" value="b"> b) A parte que cuida da lógica e do funcionamento interno
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">5 - O que é uma API?</label><br>
+        <input type="radio" name="q5" value="a"> a) Um tipo de aplicativo de celular<br>
+        <input type="radio" name="q5" value="b"> b) Uma forma de sistemas se comunicarem entre si
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">6 - O que é versionamento de código?</label><br>
+        <input type="radio" name="q6" value="a"> a) Controlar as alterações feitas no código<br>
+        <input type="radio" name="q6" value="b"> b) Instalar novos programas no computador
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">7 - Para que servem os testes em um sistema?</label><br>
+        <input type="radio" name="q7" value="a"> a) Para verificar se tudo funciona corretamente<br>
+        <input type="radio" name="q7" value="b"> b) Apenas para decorar o programa
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">8 - O que é manutenção de sistemas?</label><br>
+        <input type="radio" name="q8" value="a"> a) Corrigir erros e atualizar o sistema<br>
+        <input type="radio" name="q8" value="b"> b) Montar computadores novos
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">9 - O que é um requisito de sistema?</label><br>
+        <input type="radio" name="q9" value="a"> a) Uma necessidade ou função que o sistema deve atender<br>
+        <input type="radio" name="q9" value="b"> b) Uma peça de hardware como teclado ou mouse
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">10 - O que é arquitetura cliente-servidor?</label><br>
+        <input type="radio" name="q10" value="a"> a) Um modelo onde o cliente pede e o servidor responde<br>
+        <input type="radio" name="q10" value="b"> b) Uma estrutura de rede usada apenas em jogos
+      </div>
+
+      <div id="resultadoTecnico" class="alert alert-info mt-3" style="display: none;"></div>
+
+      <!-- Perguntas Pessoais -->
+      <h3 class="mt-5 mb-3">Perguntas Pessoais (opcional)</h3>
+
+      <div class="mb-3">
+        <label>Quem foi o melhor?</label><br>
+        <input type="checkbox" name="melhor[]" value="Clevinton"> Clevinton<br>
+        <input type="checkbox" name="melhor[]" value="Allison"> Allison<br>
+        <input type="checkbox" name="melhor[]" value="Monica / Jesus"> Monica / Jesus<br>
+        <input type="checkbox" name="melhor[]" value="Alexandre"> Alexandre<br>
+        <input type="checkbox" name="melhor[]" value="Jesus"> Jesus
+      </div>
+
+      <div class="mb-3">
+        <label>Vai continuar na profissão?</label><br>
+        <input type="radio" name="profissao" value="sim"> Sim
+        <input type="radio" name="profissao" value="nao"> Não
+      </div>
+
+      <div class="mb-3">
+        <label>Vai fazer faculdade?</label><br>
+        <input type="radio" name="faculdade" value="sim"> Sim
+        <input type="radio" name="faculdade" value="nao"> Não
+      </div>
+
+      <div class="mb-3">
+        <label>Estou formando, vou fazer curso.</label><br>
+        <input type="radio" name="curso" value="sim"> Sim
+        <input type="radio" name="curso" value="nao"> Não
+      </div>
+
+      <div class="mb-3">
+        <label>Vai parar o curso?</label><br>
+        <input type="radio" name="parar_curso" value="sim"> Sim
+        <input type="radio" name="parar_curso" value="nao"> Não
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Enviar todas as respostas</button>
+
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

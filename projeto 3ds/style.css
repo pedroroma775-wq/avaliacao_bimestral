@@ -1,0 +1,121 @@
+/* ===== Estilo Global ===== */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.nav-link {
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #0d6efd !important;
+}
+
+/* ===== Títulos ===== */
+h1, h2, h3 {
+  font-weight: 600;
+  color: #222;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin-top: 1rem;
+}
+
+/* ===== Cards / Conteúdo ===== */
+.card {
+  border-radius: 12px;
+  border: none;
+}
+
+.card-body {
+  font-size: 1rem;
+  text-align: justify;
+}
+
+/* ===== Accordion ===== */
+.accordion-button {
+  font-weight: 500;
+  background: #f1f1f1;
+  transition: background 0.3s;
+}
+
+.accordion-button:hover {
+  background: #e6e6e6;
+}
+
+/* ===== Formulários ===== */
+textarea, input, button {
+  border-radius: 8px !important;
+}
+
+textarea {
+  resize: none;
+}
+
+button.btn-primary {
+  background: #0d6efd;
+  border: none;
+  transition: background 0.3s;
+}
+
+button.btn-primary:hover {
+  background: #0b5ed7;
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 900px;
+}
+
+/* ===== Biografia ===== */
+.biografia {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.biografia img {
+  width: 150px; /* tamanho menor */
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.biografia textarea {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: block;
+  padding: 15px;
+  font-size: 1rem;
+}
+
+/* ===== Footer (opcional) ===== */
+footer {
+  margin-top: 40px;
+  padding: 15px;
+  text-align: center;
+  background: #222;
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+}
